@@ -39,6 +39,9 @@ export default function Home() {
 
     if (response.ok) {
       const data = await response.json();
+      console.log("🚀 ~ fetchFilteredPosts ~ data:", data);
+      console.log("data", data);
+
       setFilteredPosts(data);
     }
   };

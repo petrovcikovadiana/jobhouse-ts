@@ -1,15 +1,28 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { Filters } from "@/app/types/types";
+import {
+  useState,
+  useEffect,
+  useMemo,
+  ChangeEventHandler,
+  FormEventHandler,
+} from "react";
+import FilterButton from "./FilterButton";
 
-export default function Filter({ onApply }) {
-  const [filters, setFilters] = useState({
+type Props = {
+  onApply: (filters: Filters) => void;
+};
+
+export default function Filter({ onApply }: Props) {
+  const defaultFilters: Filters = {
     location: [],
     salary: 10000,
     jobContract: [],
     field: [],
     seniority: [],
-  });
+  };
+  const [filters, setFilters] = useState(defaultFilters);
 
   const [isClient, setIsClient] = useState(false);
 
@@ -17,7 +30,7 @@ export default function Filter({ onApply }) {
     setIsClient(true); // Salary is rendering on client
   }, []);
 
-  const handleLocationClick = (location) => {
+  const handleLocationClick = (location: string) => {
     setFilters((prev) => ({
       ...prev,
       location: prev.location.includes(location)
@@ -26,7 +39,7 @@ export default function Filter({ onApply }) {
     }));
   };
 
-  const handleJobContractClick = (jobContract) => {
+  const handleJobContractClick = (jobContract: string) => {
     setFilters((prev) => ({
       ...prev,
       jobContract: prev.jobContract.includes(jobContract)
@@ -35,7 +48,7 @@ export default function Filter({ onApply }) {
     }));
   };
 
-  const handleFieldClick = (field) => {
+  const handleFieldClick = (field: string) => {
     setFilters((prev) => ({
       ...prev,
       field: prev.field.includes(field)
@@ -44,7 +57,8 @@ export default function Filter({ onApply }) {
     }));
   };
 
-  const handleSeniorityClick = (seniority) => {
+  const handleSeniorityClick = (seniority: string) => {
+    console.log("🚀 ~ handleSeniorityClick ~ seniority:", seniority);
     setFilters((prev) => ({
       ...prev,
       seniority: prev.seniority.includes(seniority)
@@ -53,7 +67,7 @@ export default function Filter({ onApply }) {
     }));
   };
 
-  const handleSalaryChange = (e) => {
+  const handleSalaryChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const newSalary = Number(e.target.value);
     setFilters((prev) => ({
       ...prev,
@@ -61,7 +75,7 @@ export default function Filter({ onApply }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     console.log("Filters applied:", filters);
     onApply(filters);
@@ -90,23 +104,12 @@ export default function Filter({ onApply }) {
             "Kladno",
             "Mladá Boleslav",
           ].map((location) => (
-            <button
+            <FilterButton
               key={location}
-              type="button"
               onClick={() => handleLocationClick(location)}
-              style={{
-                padding: "10px 15px",
-                border: "1px solid #ccc",
-                borderRadius: "15px",
-                backgroundColor: filters.location.includes(location)
-                  ? "rgb(193, 127, 204)"
-                  : "#fff",
-                color: filters.location.includes(location) ? "#fff" : "#000",
-                cursor: "pointer",
-              }}
-            >
-              {location}
-            </button>
+              isActive={filters.location.includes(location)}
+              value={location}
+            />
           ))}
         </div>
       </div>
