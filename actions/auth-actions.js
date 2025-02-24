@@ -3,7 +3,7 @@
 import { createUser } from "@/lib/user";
 import { hashUserPassword } from "@/lib/hash";
 import { redirect } from "next/navigation";
-import { createAuthSession, destroySession } from "@/lib/auth";
+import { createAuthSession } from "@/lib/auth";
 import { getUserByEmail } from "@/lib/user";
 import { verifyPassword } from "@/lib/hash";
 
