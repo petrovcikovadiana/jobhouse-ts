@@ -23,27 +23,6 @@
 
 ---
 
-## 🚀 Getting Started
-```sh
-1️⃣ Clone the Repository**
-git clone https://github.com/petrovcikovadiana/jobhouse-ts.git
-cd jobhouse-ts
 
-2️⃣ Install Dependencies
-npm install
-
-3️⃣ Set Up Environment Variables
-Create a .env.local file in the root directory and add the following:
-
-DATABASE_URL=sqlite:./db.sqlite
-CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-
-4️⃣ Run the Development Server
-sh
-npm run dev
-
-✅ The app will be available at http://localhost:3000
 
 
